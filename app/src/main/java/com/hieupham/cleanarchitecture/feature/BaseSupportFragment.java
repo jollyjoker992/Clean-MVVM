@@ -1,8 +1,10 @@
 package com.hieupham.cleanarchitecture.feature;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,12 @@ public abstract class BaseSupportFragment extends DaggerSupportFragment {
 
     private Unbinder unbinder;
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        getLifecycle().addObserver(viewModel());
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -27,11 +35,43 @@ public abstract class BaseSupportFragment extends DaggerSupportFragment {
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initComponents();
+        observe();
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
     }
 
+    /**
+     * Define the layout res id can be used to inflate {@link View}
+     *
+     * @return the layout res id
+     */
     @LayoutRes
-    public abstract int layoutRes();
+    protected abstract int layoutRes();
+
+    /**
+     * Define the {@link BaseViewModel} instance
+     *
+     * @return the {@link BaseViewModel} instance
+     */
+    protected abstract BaseViewModel viewModel();
+
+    /**
+     * Init {@link View} components here. Such as set adapter for {@link RecyclerView}, set listener
+     * or anything else
+     */
+    protected void initComponents() {
+    }
+
+    /**
+     * Observe data change from ViewModel
+     */
+    protected void observe() {
+    }
 }

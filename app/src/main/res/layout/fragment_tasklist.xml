@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hieupham.cleanarchitecture.feature.tasklist.TaskListActivity"
+    tools:context="com.hieupham.cleanarchitecture.feature.tasklist.TaskListFragment"
     >
 
     <android.support.v7.widget.RecyclerView

@@ -1,10 +1,9 @@
 package com.hieupham.cleanarchitecture.feature.tasklist;
 
 import com.hieupham.cleanarchitecture.data.source.TaskRepository;
-import com.hieupham.cleanarchitecture.feature.ActivityScope;
 import com.hieupham.cleanarchitecture.feature.DialogManager;
+import com.hieupham.cleanarchitecture.feature.FragmentScope;
 import com.hieupham.cleanarchitecture.feature.Navigator;
-import com.hieupham.cleanarchitecture.feature.taskdetail.TaskDetailComponent;
 import dagger.Module;
 import dagger.Provides;
 
@@ -12,30 +11,30 @@ import dagger.Provides;
  * Created by hieupham on 5/14/18.
  */
 
-@Module(subcomponents = { TaskDetailComponent.class })
+@Module
 public class TaskListModule {
 
     @Provides
-    @ActivityScope
+    @FragmentScope
     ViewModel provideViewModel(TaskRepository taskRepo) {
         return new TaskListViewModel(taskRepo);
     }
 
     @Provides
-    @ActivityScope
-    Navigator<TaskListActivity> provideNavigator(TaskListActivity activity) {
-        return new Navigator<>(activity);
+    @FragmentScope
+    Navigator<TaskListFragment> provideNavigator(TaskListFragment fragment) {
+        return new Navigator<>(fragment);
     }
 
     @Provides
-    @ActivityScope
+    @FragmentScope
     TaskListAdapter provideAdapter() {
         return new TaskListAdapter();
     }
 
     @Provides
-    @ActivityScope
-    DialogManager provideDialogManager(TaskListActivity activity) {
-        return new DialogManager(activity);
+    @FragmentScope
+    DialogManager provideDialogManager(TaskListFragment fragment) {
+        return new DialogManager(fragment.getActivity());
     }
 }

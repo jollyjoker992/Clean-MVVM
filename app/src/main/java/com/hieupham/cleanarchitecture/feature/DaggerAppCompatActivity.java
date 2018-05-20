@@ -14,6 +14,12 @@ import javax.inject.Inject;
  * Created by hieupham on 5/15/18.
  */
 
+/**
+ * The {@link AppCompatActivity} base class for implementing dependency injection using Dagger 2
+ * <br>
+ * You only need to extends this class from another activity, all member variables that are marked
+ * with @{@link Inject} annotation will be injected automatically.
+ */
 public abstract class DaggerAppCompatActivity extends AppCompatActivity
         implements HasSupportFragmentInjector {
 

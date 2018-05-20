@@ -1,24 +1,24 @@
 package com.hieupham.cleanarchitecture;
 
 import android.app.Activity;
-import com.hieupham.cleanarchitecture.feature.tasklist.TaskListActivity;
-import com.hieupham.cleanarchitecture.feature.tasklist.TaskListActivityComponent;
-import dagger.Binds;
+import com.hieupham.cleanarchitecture.feature.ActivityScope;
+import com.hieupham.cleanarchitecture.feature.main.MainActivity;
+import com.hieupham.cleanarchitecture.feature.main.MainModule;
 import dagger.Module;
-import dagger.android.ActivityKey;
-import dagger.android.AndroidInjector;
-import dagger.multibindings.IntoMap;
+import dagger.android.ContributesAndroidInjector;
 
 /**
  * Created by hieupham on 5/14/18.
  */
 
+/**
+ * The {@link Module} class declares how to inject an {@link Activity} instance into corresponding
+ * {@link Module}
+ */
 @Module
 public abstract class ActivityBuilderModule {
 
-    @Binds
-    @IntoMap
-    @ActivityKey(TaskListActivity.class)
-    abstract AndroidInjector.Factory<? extends Activity> bindTaskListActivity(
-            TaskListActivityComponent.Builder builder);
+    @ContributesAndroidInjector(modules = MainModule.class)
+    @ActivityScope
+    abstract MainActivity bindMainActivity();
 }

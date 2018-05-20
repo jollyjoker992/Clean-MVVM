@@ -1,5 +1,6 @@
 package com.hieupham.cleanarchitecture.utils.livedata;
 
+import android.arch.lifecycle.LiveData;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 
@@ -11,6 +12,11 @@ import static com.hieupham.cleanarchitecture.utils.livedata.Resource.Status.SUCC
  * Created by hieupham on 5/18/18.
  */
 
+/**
+ * Wrapper class to handle data state when use with {@link LiveData}
+ *
+ * @param <T> Data type
+ */
 public class Resource<T> {
 
     @IntDef({ SUCCESS, LOADING, ERROR })

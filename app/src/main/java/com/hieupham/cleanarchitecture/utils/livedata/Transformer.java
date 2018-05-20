@@ -16,6 +16,9 @@ import org.reactivestreams.Subscription;
  * Created by hieupham on 5/18/18.
  */
 
+/**
+ * Helper class to transform Reactive Data Flow to {@link LiveData}
+ */
 public class Transformer {
 
     public static <T> LiveData<Resource<T>> maybe(Maybe<T> source) {

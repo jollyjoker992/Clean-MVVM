@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 
 /**
  * Created by hieupham on 5/14/18.
@@ -24,6 +25,14 @@ public class Navigator<T> {
             this.fragment = (Fragment) host;
             this.activity = ((Fragment) host).getActivity();
         }
+    }
+
+    public void replaceFragment(@IdRes int container, Fragment fragment, boolean addToBackStack) {
+        FragmentTransaction transaction = activity.getSupportFragmentManager()
+                .beginTransaction()
+                .replace(container, fragment);
+        if (addToBackStack) transaction.addToBackStack(null);
+        transaction.commitAllowingStateLoss();
     }
 
     public void addFragment(@IdRes int container, Fragment fragment) {
