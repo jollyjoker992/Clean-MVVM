@@ -3,12 +3,19 @@ package com.hieupham.cleanarchitecture.feature;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
+import android.support.annotation.Nullable;
 
 /**
  * Created by hieupham on 5/14/18.
  */
 
-public abstract class BaseViewModel implements LifecycleObserver {
+public abstract class BaseViewModel<T extends BaseUseCase> implements LifecycleObserver {
+
+    protected T useCase;
+
+    public BaseViewModel(@Nullable T useCase) {
+        this.useCase = useCase;
+    }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     public void onCreate() {
@@ -33,6 +40,11 @@ public abstract class BaseViewModel implements LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void onDestroy() {
+        dispose();
+    }
 
+    private void dispose() {
+        if (useCase == null) return;
+        useCase.dispose();
     }
 }

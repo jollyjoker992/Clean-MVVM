@@ -29,17 +29,7 @@ public class MainActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected void initComponents() {
-
-    }
-
-    @Override
     protected BaseViewModel viewModel() {
         return viewModel;
-    }
-
-    @Override
-    protected void observe() {
-
     }
 }

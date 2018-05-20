@@ -1,7 +1,5 @@
 package com.hieupham.cleanarchitecture.feature.taskdetail;
 
-import com.hieupham.cleanarchitecture.data.source.TaskRepository;
-import com.hieupham.cleanarchitecture.data.source.UserRepository;
 import com.hieupham.cleanarchitecture.feature.FragmentScope;
 import dagger.Module;
 import dagger.Provides;
@@ -15,8 +13,7 @@ public class TaskDetailModule {
 
     @Provides
     @FragmentScope
-    ViewModel provideViewModel(TaskRepository taskRepo,
-            UserRepository userRepo) {
-        return new TaskDetailViewModel(taskRepo, userRepo);
+    ViewModel provideViewModel() {
+        return new TaskDetailViewModel();
     }
 }

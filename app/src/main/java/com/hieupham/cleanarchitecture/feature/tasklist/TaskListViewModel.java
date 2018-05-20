@@ -4,8 +4,8 @@ import android.arch.core.util.Function;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Transformations;
+import android.support.annotation.Nullable;
 import com.hieupham.cleanarchitecture.data.model.Task;
-import com.hieupham.cleanarchitecture.data.source.TaskRepository;
 import com.hieupham.cleanarchitecture.utils.livedata.Resource;
 import java.util.List;
 
@@ -15,18 +15,17 @@ import java.util.List;
 
 public class TaskListViewModel extends ViewModel {
 
-    private TaskRepository taskRepo;
     private final MutableLiveData<String> uid = new MutableLiveData<>();
     private LiveData<Resource<List<Task>>> liveTasks =
             Transformations.switchMap(uid, new Function<String, LiveData<Resource<List<Task>>>>() {
                 @Override
                 public LiveData<Resource<List<Task>>> apply(String uid) {
-                    return taskRepo.getTasksByOwner(uid);
+                    return useCase.getTasksByOwner(uid);
                 }
             });
 
-    TaskListViewModel(TaskRepository taskRepo) {
-        this.taskRepo = taskRepo;
+    TaskListViewModel(@Nullable UseCase useCase) {
+        super(useCase);
     }
 
     @Override

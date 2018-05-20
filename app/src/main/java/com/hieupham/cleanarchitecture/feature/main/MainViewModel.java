@@ -5,4 +5,5 @@ package com.hieupham.cleanarchitecture.feature.main;
  */
 
 public class MainViewModel extends ViewModel {
+
 }

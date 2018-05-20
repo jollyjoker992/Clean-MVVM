@@ -4,6 +4,7 @@ import com.hieupham.cleanarchitecture.data.source.TaskRepository;
 import com.hieupham.cleanarchitecture.feature.DialogManager;
 import com.hieupham.cleanarchitecture.feature.FragmentScope;
 import com.hieupham.cleanarchitecture.feature.Navigator;
+import com.hieupham.cleanarchitecture.utils.livedata.Transformer;
 import dagger.Module;
 import dagger.Provides;
 
@@ -16,8 +17,14 @@ public class TaskListModule {
 
     @Provides
     @FragmentScope
-    ViewModel provideViewModel(TaskRepository taskRepo) {
-        return new TaskListViewModel(taskRepo);
+    ViewModel provideViewModel(UseCase useCase) {
+        return new TaskListViewModel(useCase);
+    }
+
+    @Provides
+    @FragmentScope
+    UseCase provideUseCase(Transformer transformer, TaskRepository taskRepo) {
+        return new TaskListUseCase(transformer, taskRepo);
     }
 
     @Provides

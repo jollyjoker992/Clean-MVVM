@@ -8,4 +8,7 @@ import com.hieupham.cleanarchitecture.feature.BaseViewModel;
 
 public abstract class ViewModel extends BaseViewModel {
 
+    public ViewModel() {
+        super(null);
+    }
 }
