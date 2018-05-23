@@ -2,6 +2,8 @@ package com.hieupham.cleanarchitecture.data.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 
@@ -10,7 +12,7 @@ import com.google.gson.annotations.Expose;
  */
 
 @Entity(tableName = "User")
-public class User {
+public class User implements Parcelable {
 
     @PrimaryKey
     @Expose
@@ -22,6 +24,30 @@ public class User {
 
     @Expose
     private String email;
+
+    public User(@NonNull String uid, String name, String email) {
+        this.uid = uid;
+        this.name = name;
+        this.email = email;
+    }
+
+    protected User(Parcel in) {
+        uid = in.readString();
+        name = in.readString();
+        email = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public String getUid() {
         return uid;
@@ -45,5 +71,37 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(uid);
+        dest.writeString(name);
+        dest.writeString(email);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+
+        User user = (User) o;
+
+        if (!uid.equals(user.uid)) return false;
+        if (name != null ? !name.equals(user.name) : user.name != null) return false;
+        return email != null ? email.equals(user.email) : user.email == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = uid.hashCode();
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        return result;
     }
 }

@@ -15,6 +15,7 @@ import com.hieupham.cleanarchitecture.feature.DialogManager;
 import com.hieupham.cleanarchitecture.feature.Navigator;
 import com.hieupham.cleanarchitecture.feature.taskdetail.TaskDetailFragment;
 import com.hieupham.cleanarchitecture.utils.livedata.Resource;
+import com.hieupham.cleanarchitecture.utils.modelview.TaskModel;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -75,14 +76,14 @@ public class TaskListFragment extends BaseSupportFragment
     }
 
     @Override
-    public void onItemClicked(Task task) {
+    public void onItemClicked(TaskModel task) {
         navigator.replaceFragment(R.id.layout_root, TaskDetailFragment.newInstance(task), true);
     }
 
-    private Observer<Resource<List<Task>>> observerTasks() {
-        return new Observer<Resource<List<Task>>>() {
+    private Observer<Resource<List<TaskModel>>> observerTasks() {
+        return new Observer<Resource<List<TaskModel>>>() {
             @Override
-            public void onChanged(@Nullable Resource<List<Task>> resource) {
+            public void onChanged(@Nullable Resource<List<TaskModel>> resource) {
                 if (resource == null) return;
                 progressBar.setVisibility(View.GONE);
                 if (resource.isSuccessful()) {

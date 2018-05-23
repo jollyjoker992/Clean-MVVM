@@ -1,6 +1,7 @@
 package com.hieupham.cleanarchitecture.feature.tasklist;
 
 import com.hieupham.cleanarchitecture.data.source.TaskRepository;
+import com.hieupham.cleanarchitecture.data.source.UserRepository;
 import com.hieupham.cleanarchitecture.feature.DialogManager;
 import com.hieupham.cleanarchitecture.feature.FragmentScope;
 import com.hieupham.cleanarchitecture.feature.Navigator;
@@ -23,8 +24,9 @@ public class TaskListModule {
 
     @Provides
     @FragmentScope
-    UseCase provideUseCase(Transformer transformer, TaskRepository taskRepo) {
-        return new TaskListUseCase(transformer, taskRepo);
+    UseCase provideUseCase(Transformer transformer, TaskRepository taskRepo,
+            UserRepository userRepo) {
+        return new TaskListUseCase(transformer, taskRepo, userRepo);
     }
 
     @Provides

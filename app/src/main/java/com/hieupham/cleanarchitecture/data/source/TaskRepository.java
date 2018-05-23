@@ -36,7 +36,7 @@ public class TaskRepository implements Repository {
                 });
     }
 
-    public Maybe<Task> getById(String uid) {
+    public Maybe<Task> getTaskById(String uid) {
         return localDataSource.getById(uid).switchIfEmpty(remoteDataSource.getTaskById(uid));
     }
 

@@ -1,23 +1,21 @@
-package com.hieupham.cleanarchitecture.utils;
+package com.hieupham.cleanarchitecture.data;
 
 import com.hieupham.cleanarchitecture.data.model.Task;
 import com.hieupham.cleanarchitecture.data.model.User;
-import io.reactivex.Maybe;
-import io.reactivex.MaybeSource;
-import io.reactivex.functions.Function;
-import java.net.SocketTimeoutException;
+import com.hieupham.cleanarchitecture.utils.modelview.TaskModel;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
- * Created by hieupham on 5/18/18.
+ * Created by hieupham on 5/22/18.
  */
 
 public class DataProvider {
 
-    public static Maybe<List<Task>> maybeTasksOwnerSuccess() {
-        List<Task> tasks = new ArrayList<Task>() {{
+    public static List<Task> tasks1() {
+        return new ArrayList<Task>() {{
             add(task1());
             add(task2());
             add(task3());
@@ -25,31 +23,59 @@ public class DataProvider {
             add(task5());
             add(task6());
         }};
-        return Maybe.just(tasks);
     }
 
-    public static Maybe<List<Task>> maybeTasksOwnerDelaySuccess() {
-        return maybeTasksOwnerSuccess().delay(3, TimeUnit.SECONDS);
+    public static List<Task> tasks2() {
+        return new ArrayList<Task>() {{
+            add(task1());
+            add(task2());
+            add(task5());
+            add(task3());
+            add(task4());
+        }};
     }
 
-    public static Maybe<List<Task>> maybeTasksOwnerError() {
-        return Maybe.error(new SocketTimeoutException("Timeout"));
+    public static List<Task> tasks3() {
+        return new ArrayList<Task>() {{
+            add(task4());
+            add(task5());
+            add(task6());
+            add(task1());
+            add(task2());
+            add(task3());
+        }};
     }
 
-    public static Maybe<List<Task>> maybeTasksOwnerErrorDelay() {
-        return Maybe.just(1)
-                .delay(3, TimeUnit.SECONDS)
-                .flatMap(new Function<Integer, MaybeSource<List<Task>>>() {
-                    @Override
-                    public MaybeSource<List<Task>> apply(Integer integer) throws Exception {
-                        return Maybe.error(new SocketTimeoutException(
-                                "Timeout when trying connect with server"));
-                    }
-                });
+    public static List<TaskModel> taskModels1() {
+        return new ArrayList<TaskModel>() {{
+            add(TaskModel.from(task1(), user1()));
+            add(TaskModel.from(task2(), user1()));
+            add(TaskModel.from(task3(), user1()));
+            add(TaskModel.from(task4(), user1()));
+            add(TaskModel.from(task5(), user1()));
+            add(TaskModel.from(task6(), user1()));
+        }};
     }
 
-    public static Maybe<User> maybeUserSuccess() {
-        return Maybe.just(user1());
+    public static List<TaskModel> taskModels2() {
+        return new ArrayList<TaskModel>() {{
+            add(TaskModel.from(task1(), user1()));
+            add(TaskModel.from(task2(), user2()));
+            add(TaskModel.from(task5(), user5()));
+            add(TaskModel.from(task3(), user3()));
+            add(TaskModel.from(task4(), user4()));
+        }};
+    }
+
+    public static List<TaskModel> taskModels3() {
+        return new ArrayList<TaskModel>() {{
+            add(TaskModel.from(task4(), user4()));
+            add(TaskModel.from(task5(), user5()));
+            add(TaskModel.from(task6(), user6()));
+            add(TaskModel.from(task1(), user1()));
+            add(TaskModel.from(task2(), user2()));
+            add(TaskModel.from(task3(), user3()));
+        }};
     }
 
     public static Task task1() {
@@ -104,5 +130,17 @@ public class DataProvider {
 
     public static User user6() {
         return new User("006", "Name6", "Email6");
+    }
+
+    public static List<Task> emptyTasks() {
+        return new ArrayList<>();
+    }
+
+    public static SQLException sqlException() {
+        return new SQLException("SQLite exception has occurred");
+    }
+
+    public static TimeoutException timeoutException() {
+        return new TimeoutException("Timeout Exception has occurred");
     }
 }

@@ -2,9 +2,9 @@ package com.hieupham.cleanarchitecture.feature.tasklist;
 
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.Nullable;
-import com.hieupham.cleanarchitecture.data.model.Task;
 import com.hieupham.cleanarchitecture.feature.BaseViewModel;
 import com.hieupham.cleanarchitecture.utils.livedata.Resource;
+import com.hieupham.cleanarchitecture.utils.modelview.TaskModel;
 import java.util.List;
 
 /**
@@ -19,5 +19,5 @@ public abstract class ViewModel extends BaseViewModel<UseCase> {
 
     abstract void init(String uid);
 
-    abstract LiveData<Resource<List<Task>>> tasks();
+    abstract LiveData<Resource<List<TaskModel>>> tasks();
 }

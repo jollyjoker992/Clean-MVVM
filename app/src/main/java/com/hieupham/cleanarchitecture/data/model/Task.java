@@ -9,7 +9,6 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringDef;
 import com.google.gson.annotations.Expose;
-import java.util.UUID;
 
 /**
  * Created by hieupham on 5/14/18.
@@ -60,12 +59,8 @@ public class Task implements Parcelable {
     @Expose
     private String url;
 
-    private Task() {
-        uid = UUID.randomUUID().toString();
-    }
-
-    public Task(String title, String ownerUid, String status, String url) {
-        this();
+    public Task(@NonNull String uid, String title, String ownerUid, String status, String url) {
+        this.uid = uid;
         this.title = title;
         this.ownerUid = ownerUid;
         this.status = status;
@@ -164,5 +159,41 @@ public class Task implements Parcelable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Task)) return false;
+
+        Task task = (Task) o;
+
+        if (!uid.equals(task.uid)) return false;
+        if (title != null ? !title.equals(task.title) : task.title != null) return false;
+        if (description != null ? !description.equals(task.description)
+                : task.description != null) {
+            return false;
+        }
+        if (ownerUid != null ? !ownerUid.equals(task.ownerUid) : task.ownerUid != null) {
+            return false;
+        }
+        if (reviewerUid != null ? !reviewerUid.equals(task.reviewerUid)
+                : task.reviewerUid != null) {
+            return false;
+        }
+        if (status != null ? !status.equals(task.status) : task.status != null) return false;
+        return url != null ? url.equals(task.url) : task.url == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = uid.hashCode();
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (ownerUid != null ? ownerUid.hashCode() : 0);
+        result = 31 * result + (reviewerUid != null ? reviewerUid.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (url != null ? url.hashCode() : 0);
+        return result;
     }
 }

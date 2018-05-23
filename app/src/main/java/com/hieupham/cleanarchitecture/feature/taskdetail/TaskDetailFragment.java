@@ -10,9 +10,9 @@ import butterknife.BindView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.hieupham.cleanarchitecture.R;
-import com.hieupham.cleanarchitecture.data.model.Task;
 import com.hieupham.cleanarchitecture.feature.BaseSupportFragment;
 import com.hieupham.cleanarchitecture.feature.BaseViewModel;
+import com.hieupham.cleanarchitecture.utils.modelview.TaskModel;
 import javax.inject.Inject;
 
 /**
@@ -35,7 +35,7 @@ public class TaskDetailFragment extends BaseSupportFragment {
     @BindView(R.id.text_view_status)
     TextView textStatus;
 
-    public static TaskDetailFragment newInstance(@NonNull Task task) {
+    public static TaskDetailFragment newInstance(@NonNull TaskModel task) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(TASK, task);
         TaskDetailFragment fragment = new TaskDetailFragment();
@@ -46,7 +46,7 @@ public class TaskDetailFragment extends BaseSupportFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Task task = getArguments().getParcelable(TASK);
+        TaskModel task = getArguments().getParcelable(TASK);
         if (task == null) return;
         bindData(task);
     }
@@ -61,7 +61,7 @@ public class TaskDetailFragment extends BaseSupportFragment {
         return viewModel;
     }
 
-    private void bindData(@NonNull Task task) {
+    private void bindData(@NonNull TaskModel task) {
         Glide.with(imageDes.getContext())
                 .load(task.getUrl())
                 .apply(RequestOptions.centerCropTransform())

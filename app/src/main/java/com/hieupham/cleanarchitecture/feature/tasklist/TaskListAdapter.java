@@ -15,7 +15,7 @@ import butterknife.Optional;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.hieupham.cleanarchitecture.R;
-import com.hieupham.cleanarchitecture.data.model.Task;
+import com.hieupham.cleanarchitecture.utils.modelview.TaskModel;
 import java.util.List;
 
 /**
@@ -24,15 +24,15 @@ import java.util.List;
 
 public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHolder> {
 
-    private List<Task> tasks;
+    private List<TaskModel> tasks;
     private OnItemClickListener listener;
 
-    void setTasks(@NonNull List<Task> tasks) {
+    void setTasks(@NonNull List<TaskModel> tasks) {
         this.tasks = tasks;
         notifyDataSetChanged();
     }
 
-    void addTasks(@NonNull List<Task> tasks) {
+    void addTasks(@NonNull List<TaskModel> tasks) {
         this.tasks.addAll(tasks);
         notifyItemInserted(this.tasks.size());
     }
@@ -69,10 +69,13 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
         @BindView(R.id.text_view_status)
         TextView textViewStatus;
 
+        @BindView(R.id.text_view_owner)
+        TextView textViewOwner;
+
         @Nullable
         OnItemClickListener listener;
 
-        Task task;
+        TaskModel task;
 
         ViewHolder(View view, @Nullable OnItemClickListener listener) {
             super(view);
@@ -80,7 +83,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
             this.listener = listener;
         }
 
-        void bind(@NonNull Task task) {
+        void bind(@NonNull TaskModel task) {
             this.task = task;
             Glide.with(imageDes.getContext())
                     .load(this.task.getUrl())
@@ -88,6 +91,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
                     .into(imageDes);
             textViewTitle.setText(this.task.getTitle());
             textViewStatus.setText(this.task.getStatus().toUpperCase());
+            textViewOwner.setText(this.task.getUser().getName());
         }
 
         @OnClick(R.id.layout_root)
@@ -99,6 +103,6 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
     }
 
     public interface OnItemClickListener {
-        void onItemClicked(Task task);
+        void onItemClicked(TaskModel task);
     }
 }
