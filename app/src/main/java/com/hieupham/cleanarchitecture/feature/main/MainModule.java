@@ -1,7 +1,7 @@
 package com.hieupham.cleanarchitecture.feature.main;
 
-import com.hieupham.cleanarchitecture.FragmentBuilderModule;
-import com.hieupham.cleanarchitecture.feature.ActivityScope;
+import com.hieupham.cleanarchitecture.di.FragmentBuilderModule;
+import com.hieupham.cleanarchitecture.di.ActivityScope;
 import com.hieupham.cleanarchitecture.feature.Navigator;
 import dagger.Module;
 import dagger.Provides;

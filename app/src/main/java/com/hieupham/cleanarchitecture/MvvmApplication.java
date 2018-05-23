@@ -1,5 +1,6 @@
 package com.hieupham.cleanarchitecture;
 
+import com.hieupham.cleanarchitecture.di.DaggerApplication;
 import dagger.android.HasActivityInjector;
 
 /**

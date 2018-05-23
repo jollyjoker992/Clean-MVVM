@@ -2,6 +2,7 @@ package com.hieupham.cleanarchitecture;
 
 import android.app.Application;
 import android.content.Context;
+import com.hieupham.cleanarchitecture.di.AppScope;
 import dagger.Module;
 import dagger.Provides;
 

@@ -3,6 +3,8 @@ package com.hieupham.cleanarchitecture;
 import android.app.Application;
 import com.hieupham.cleanarchitecture.data.source.RepositoryModule;
 import com.hieupham.cleanarchitecture.data.source.remote.api.NetworkModule;
+import com.hieupham.cleanarchitecture.di.ActivityBuilderModule;
+import com.hieupham.cleanarchitecture.di.AppScope;
 import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.AndroidInjector;

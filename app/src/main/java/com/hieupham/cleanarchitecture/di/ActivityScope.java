@@ -1,4 +1,4 @@
-package com.hieupham.cleanarchitecture.feature;
+package com.hieupham.cleanarchitecture.di;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -10,5 +10,5 @@ import javax.inject.Scope;
 
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FragmentScope {
+public @interface ActivityScope {
 }

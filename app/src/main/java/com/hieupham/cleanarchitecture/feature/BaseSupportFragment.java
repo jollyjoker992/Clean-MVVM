@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import com.hieupham.cleanarchitecture.di.DaggerSupportFragment;
 
 /**
  * Created by hieupham on 5/16/18.

@@ -1,6 +1,6 @@
 package com.hieupham.cleanarchitecture.feature.taskdetail;
 
-import com.hieupham.cleanarchitecture.feature.FragmentScope;
+import com.hieupham.cleanarchitecture.di.FragmentScope;
 import dagger.Module;
 import dagger.Provides;
 

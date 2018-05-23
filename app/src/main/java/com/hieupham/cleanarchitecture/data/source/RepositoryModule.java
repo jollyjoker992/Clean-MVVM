@@ -2,7 +2,7 @@ package com.hieupham.cleanarchitecture.data.source;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
-import com.hieupham.cleanarchitecture.AppScope;
+import com.hieupham.cleanarchitecture.di.AppScope;
 import com.hieupham.cleanarchitecture.data.source.local.TaskLocalDataSource;
 import com.hieupham.cleanarchitecture.data.source.local.UserLocalDataSource;
 import com.hieupham.cleanarchitecture.data.source.local.api.DatabaseManager;

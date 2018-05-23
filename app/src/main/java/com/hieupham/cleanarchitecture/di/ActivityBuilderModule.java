@@ -1,7 +1,6 @@
-package com.hieupham.cleanarchitecture;
+package com.hieupham.cleanarchitecture.di;
 
 import android.app.Activity;
-import com.hieupham.cleanarchitecture.feature.ActivityScope;
 import com.hieupham.cleanarchitecture.feature.main.MainActivity;
 import com.hieupham.cleanarchitecture.feature.main.MainModule;
 import dagger.Module;

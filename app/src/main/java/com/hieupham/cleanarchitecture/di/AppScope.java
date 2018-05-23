@@ -1,4 +1,4 @@
-package com.hieupham.cleanarchitecture;
+package com.hieupham.cleanarchitecture.di;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

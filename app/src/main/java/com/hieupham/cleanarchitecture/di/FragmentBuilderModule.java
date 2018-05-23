@@ -1,8 +1,8 @@
-package com.hieupham.cleanarchitecture;
+package com.hieupham.cleanarchitecture.di;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;
-import com.hieupham.cleanarchitecture.feature.FragmentScope;
+import com.hieupham.cleanarchitecture.di.FragmentScope;
 import com.hieupham.cleanarchitecture.feature.taskdetail.TaskDetailFragment;
 import com.hieupham.cleanarchitecture.feature.taskdetail.TaskDetailModule;
 import com.hieupham.cleanarchitecture.feature.tasklist.TaskListFragment;

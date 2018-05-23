@@ -1,4 +1,4 @@
-package com.hieupham.cleanarchitecture.feature;
+package com.hieupham.cleanarchitecture.di;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;

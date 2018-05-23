@@ -1,4 +1,4 @@
-package com.hieupham.cleanarchitecture;
+package com.hieupham.cleanarchitecture.di;
 
 import android.app.Activity;
 import android.app.Application;
@@ -11,7 +11,7 @@ import javax.inject.Inject;
  * Created by hieupham on 5/15/18.
  */
 
-abstract class DaggerApplication extends Application implements HasActivityInjector {
+public abstract class DaggerApplication extends Application implements HasActivityInjector {
 
     @Inject
     DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;

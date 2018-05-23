@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import butterknife.ButterKnife;
+import com.hieupham.cleanarchitecture.di.DaggerAppCompatActivity;
 
 /**
  * Created by hieupham on 5/15/18.
@@ -17,10 +18,10 @@ public abstract class BaseAppCompatActivity extends DaggerAppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getLifecycle().addObserver(viewModel());
         setContentView(layoutRes());
         ButterKnife.bind(this);
         initComponents();
-        getLifecycle().addObserver(viewModel());
         observe();
     }
 

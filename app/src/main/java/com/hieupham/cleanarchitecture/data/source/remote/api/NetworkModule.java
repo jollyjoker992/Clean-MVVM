@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hieupham.cleanarchitecture.AppScope;
+import com.hieupham.cleanarchitecture.di.AppScope;
 import com.hieupham.cleanarchitecture.data.source.remote.api.middleware.AuthInterceptor;
 import com.hieupham.cleanarchitecture.data.source.remote.api.middleware.NonAuthInterceptor;
 import com.hieupham.cleanarchitecture.data.source.remote.api.service.AuthApi;

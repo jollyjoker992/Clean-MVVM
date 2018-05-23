@@ -3,7 +3,7 @@ package com.hieupham.cleanarchitecture.feature.tasklist;
 import com.hieupham.cleanarchitecture.data.source.TaskRepository;
 import com.hieupham.cleanarchitecture.data.source.UserRepository;
 import com.hieupham.cleanarchitecture.feature.DialogManager;
-import com.hieupham.cleanarchitecture.feature.FragmentScope;
+import com.hieupham.cleanarchitecture.di.FragmentScope;
 import com.hieupham.cleanarchitecture.feature.Navigator;
 import com.hieupham.cleanarchitecture.utils.livedata.Transformer;
 import dagger.Module;
