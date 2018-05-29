@@ -35,7 +35,7 @@ public class TaskListViewModelTest extends ViewModelTest {
     @Test
     public void verifyGetTaskByOwnerSuccess() {
         final String uid = "uid";
-        final List<TaskModel> taskModels = DataProvider.taskModels1();
+        final List<TaskModel> taskModels = DataProvider.taskModelsByUser();
         final Resource<List<TaskModel>> expectedResult = Resource.success(taskModels);
         final MutableLiveData<Resource<List<TaskModel>>> liveData = new MutableLiveData<>();
         liveData.setValue(expectedResult);

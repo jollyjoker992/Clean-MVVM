@@ -4,6 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
+import android.support.annotation.VisibleForTesting;
 import com.hieupham.cleanarchitecture.data.model.Task;
 import io.reactivex.Maybe;
 import java.util.List;
@@ -32,4 +33,8 @@ public abstract class TaskDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract void save(List<Task> tasks);
+
+    @Query("DELETE FROM Task")
+    @VisibleForTesting
+    public abstract void delete();
 }

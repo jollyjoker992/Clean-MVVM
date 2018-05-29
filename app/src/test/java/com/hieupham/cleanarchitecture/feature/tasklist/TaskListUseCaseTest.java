@@ -43,7 +43,7 @@ public class TaskListUseCaseTest extends UseCaseTest {
         final String uid = "uid";
         final List<Task> tasks = DataProvider.tasks1();
         final User user = DataProvider.user1();
-        final List<TaskModel> taskModels = DataProvider.taskModels1();
+        final List<TaskModel> taskModels = DataProvider.taskModelsByUser();
 
         when(taskRepo.getTasksByOwner(uid)).thenReturn(Maybe.just(tasks));
         when(userRepo.getUserById(uid)).thenReturn(Maybe.just(user));
@@ -99,7 +99,7 @@ public class TaskListUseCaseTest extends UseCaseTest {
         final String uid = "uid";
         final List<Task> tasks = DataProvider.tasks1();
         final User user = DataProvider.user2();
-        final List<TaskModel> taskModels = DataProvider.taskModels1();
+        final List<TaskModel> taskModels = DataProvider.taskModelsByUser();
 
         when(taskRepo.getTasksByOwner(uid)).thenReturn(Maybe.just(tasks));
         when(userRepo.getUserById(uid)).thenReturn(Maybe.just(user));

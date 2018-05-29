@@ -11,7 +11,7 @@ import com.hieupham.cleanarchitecture.data.source.local.api.dao.UserDao;
  * Created by hieupham on 5/14/18.
  */
 
-@Database(entities = { User.class, Task.class }, version = 1, exportSchema = false)
+@Database(entities = { User.class, Task.class }, version = 2)
 public abstract class DatabaseManager extends RoomDatabase {
 
     public static final String DATABASE_NAME = "room_db";

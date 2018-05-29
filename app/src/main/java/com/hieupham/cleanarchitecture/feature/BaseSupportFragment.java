@@ -24,6 +24,7 @@ public abstract class BaseSupportFragment extends DaggerSupportFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         getLifecycle().addObserver(viewModel());
+        observe();
     }
 
     @Nullable
@@ -39,7 +40,6 @@ public abstract class BaseSupportFragment extends DaggerSupportFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initComponents();
-        observe();
     }
 
     @Override

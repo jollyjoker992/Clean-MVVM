@@ -147,13 +147,78 @@ public void verifyGetTaskByOwnerSuccess() {
 ### Instrument Test
 Instrument testing helps us to test our code need an Android Components such as Context, Looper ... and need to be ran in a physical Android device or an emulator.
 
-Comming soon ...
+In this artical, we only implement instrumemt unit test, not intergration or UI test, they maybe implemented later.
+We have already implemented local unit test for testing your logic code in Repositories, Usecases and Viewmodels, so in this scope of instrument unit test, we need to implement unit test for database and anything else relate to Android Component such as File management, Sharepreference managerment, etc... I will explain how to test your database in instrument testing.
+
+##### 1. Dao Testing
+Verify your DAOs work perfectly by testing them with in memory database of Room. We need to create DAO test class that extend from DaoTest<T> and do not forget to init master data before setting up test in DataManager. We have example for DAO test as following.
+
+```java
+@Test
+public void verifyGetTaskOwner() {
+
+    final List<Task> expectedTask = DataProvider.tasksByOwner();
+    final String owner = expectedTask.get(0).getOwnerUid();
+    dao.save(expectedTask);
+
+    Maybe<List<Task>> stream = dao.getByOwner(owner);
+    TestObserver<List<Task>> observer = new TestObserver<>();
+    stream.subscribe(observer);
+
+    observer.assertValue(expectedTask);
+    observer.assertComplete();
+    observer.assertNoErrors();
+    observer.assertTerminated();
+}
+```
+
+##### 2. Migration Testing
+Verify all your migrations work correctly. Room supports MigrationTestHelper helps us to verify the migration perfectly. Below is the sample
+
+```java
+@Test
+public void verifyMigrationFrom1_2() throws IOException {
+
+    final User verifyUser = DataProvider.user1();
+
+    SupportSQLiteDatabase database =
+            migrationTestHelper.createDatabase(DatabaseManager.DATABASE_NAME, 1);
+    insertUser(verifyUser, database);
+    insertUser(DataProvider.user2(), database);
+    insertUser(DataProvider.user3(), database);
+    insertUser(DataProvider.user4(), database);
+    database.close();
+
+    migrationTestHelper.runMigrationsAndValidate(DatabaseManager.DATABASE_NAME, 2, true,
+            MigrationManager.MIGRATION_1_2);
+
+    DatabaseManager databaseManager =
+            (DatabaseManager) MigrationUtils.getDatabaseAfterPerformingMigrations(
+                    migrationTestHelper, DatabaseManager.class, DatabaseManager.DATABASE_NAME,
+                    MigrationManager.MIGRATION_1_2);
+    verifyUser.setSex(User.Sex.FEMALE);
+    databaseManager.userDao().save(verifyUser);
+    Maybe<User> stream = databaseManager.userDao().getById(verifyUser.getUid());
+    TestObserver<User> observer = new TestObserver<>();
+    stream.subscribe(observer);
+
+    observer.assertValue(new Predicate<User>() {
+        @Override
+        public boolean test(User user) throws Exception {
+            return user.getSex().equals(User.Sex.FEMALE);
+        }
+    });
+    observer.assertComplete();
+    observer.assertNoErrors();
+    observer.assertTerminated();
+}
+```
 
 # Contributing
 See [CONTRIBUTING.md](https://github.com/jollyjoker992/android-clean-architecture/blob/master/CONTRIBUTING.md) to know exact how to contribute to this repository.
 
 # Author
-- Hieu Pham - Framgia Inc - Contact jollyjoker992@gmail.com
+- Hieu Pham - Contact jollyjoker992@gmail.com
 
 See list [contributors](https://github.com/jollyjoker992/android-clean-architecture/graphs/contributors) for more detail.
 

@@ -2,6 +2,7 @@ package com.hieupham.cleanarchitecture.data.source;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import com.hieupham.cleanarchitecture.data.source.local.api.MigrationManager;
 import com.hieupham.cleanarchitecture.di.AppScope;
 import com.hieupham.cleanarchitecture.data.source.local.TaskLocalDataSource;
 import com.hieupham.cleanarchitecture.data.source.local.UserLocalDataSource;
@@ -44,6 +45,7 @@ public class RepositoryModule {
     @Provides
     DatabaseManager provideDatabaseManager(Context context) {
         return Room.databaseBuilder(context, DatabaseManager.class, DatabaseManager.DATABASE_NAME)
+                .addMigrations(MigrationManager.MIGRATION_1_2)
                 .build();
     }
 }

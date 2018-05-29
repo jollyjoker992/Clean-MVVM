@@ -1,4 +1,4 @@
-package com.hieupham.cleanarchitecture.data;
+package com.hieupham.cleanarchitecture.database.data;
 
 import com.hieupham.cleanarchitecture.data.model.Task;
 import com.hieupham.cleanarchitecture.data.model.User;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 /**
- * Created by hieupham on 5/22/18.
+ * Created by hieupham on 5/28/18.
  */
 
 public class DataProvider {
@@ -46,7 +46,34 @@ public class DataProvider {
         }};
     }
 
-    public static List<TaskModel> taskModelsByUser() {
+    public static List<Task> tasks() {
+        return tasks1();
+    }
+
+    public static List<Task> tasksByOwner() {
+        return new ArrayList<Task>() {{
+            add(task1());
+            add(task2());
+            add(task5());
+        }};
+    }
+
+    public static List<Task> tasksByOwnerStatus() {
+        return new ArrayList<Task>() {{
+            add(task2());
+            add(task5());
+        }};
+    }
+
+    public static List<Task> tasksByOwnerMultiStatus() {
+        return new ArrayList<Task>() {{
+            add(task1());
+            add(task2());
+            add(task5());
+        }};
+    }
+
+    public static List<TaskModel> taskModels1() {
         return new ArrayList<TaskModel>() {{
             add(TaskModel.from(task1(), user1()));
             add(TaskModel.from(task2(), user1()));
@@ -79,33 +106,49 @@ public class DataProvider {
     }
 
     public static Task task1() {
-        return new Task("001", "Title1", "123", Task.Status.IN_PROGRESS,
+        return new Task("001", "Title1", "001", Task.Status.IN_PROGRESS,
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/RedcrestedTuraco.jpg/1280px-RedcrestedTuraco.jpg");
     }
 
     public static Task task2() {
-        return new Task("002", "Title2", "123", Task.Status.DONE,
+        return new Task("002", "Title2", "001", Task.Status.DONE,
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Red-crested_Turaco_RWD.jpg/1280px-Red-crested_Turaco_RWD.jpg");
     }
 
     public static Task task3() {
-        return new Task("003", "Title3", "123", Task.Status.IN_PROGRESS,
+        return new Task("003", "Title3", "002", Task.Status.IN_PROGRESS,
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Tauraco_erythrolophus.JPG/800px-Tauraco_erythrolophus.JPG");
     }
 
     public static Task task4() {
-        return new Task("004", "Title4", "123", Task.Status.REOPEN,
+        return new Task("004", "Title4", "002", Task.Status.REOPEN,
                 "https://upload.wikimedia.org/wikipedia/commons/8/82/RedCrestedTuracoHead.jpg");
     }
 
     public static Task task5() {
-        return new Task("005", "Title5", "123", Task.Status.RESOLVED,
+        return new Task("005", "Title5", "001", Task.Status.DONE,
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Zuliz.JPG/1280px-Zuliz.JPG");
     }
 
     public static Task task6() {
-        return new Task("006", "Title6", "123", Task.Status.TODO,
+        return new Task("006", "Title6", "003", Task.Status.TODO,
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Zuliz.JPG/1280px-Zuliz.JPG");
+    }
+
+    public static Task task7() {
+        return new Task("007", "Title7", "003", Task.Status.RESOLVED,
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Zuliz.JPG/1280px-Zuliz.JPG");
+    }
+
+    public static List<User> users() {
+        return new ArrayList<User>() {{
+            add(user1());
+            add(user2());
+            add(user3());
+            add(user4());
+            add(user5());
+            add(user6());
+        }};
     }
 
     public static User user1() {

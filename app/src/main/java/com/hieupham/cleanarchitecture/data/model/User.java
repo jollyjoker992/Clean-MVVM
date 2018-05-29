@@ -5,6 +5,7 @@ import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringDef;
 import com.google.gson.annotations.Expose;
 
 /**
@@ -13,6 +14,13 @@ import com.google.gson.annotations.Expose;
 
 @Entity(tableName = "User")
 public class User implements Parcelable {
+
+    @StringDef({ Sex.FEMALE, Sex.MALE, Sex.OTHER })
+    public @interface Sex {
+        String MALE = "male";
+        String FEMALE = "female";
+        String OTHER = "other";
+    }
 
     @PrimaryKey
     @Expose
@@ -25,6 +33,10 @@ public class User implements Parcelable {
     @Expose
     private String email;
 
+    @Expose
+    @Sex
+    private String sex;
+
     public User(@NonNull String uid, String name, String email) {
         this.uid = uid;
         this.name = name;
@@ -35,6 +47,7 @@ public class User implements Parcelable {
         uid = in.readString();
         name = in.readString();
         email = in.readString();
+        sex = in.readString();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -73,6 +86,14 @@ public class User implements Parcelable {
         this.email = email;
     }
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -83,6 +104,7 @@ public class User implements Parcelable {
         dest.writeString(uid);
         dest.writeString(name);
         dest.writeString(email);
+        dest.writeString(sex);
     }
 
     @Override
@@ -94,7 +116,8 @@ public class User implements Parcelable {
 
         if (!uid.equals(user.uid)) return false;
         if (name != null ? !name.equals(user.name) : user.name != null) return false;
-        return email != null ? email.equals(user.email) : user.email == null;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        return sex != null ? sex.equals(user.sex) : user.sex == null;
     }
 
     @Override
@@ -102,6 +125,7 @@ public class User implements Parcelable {
         int result = uid.hashCode();
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (sex != null ? sex.hashCode() : 0);
         return result;
     }
 }
